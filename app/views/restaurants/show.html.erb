@@ -1,0 +1,87 @@
+
+
+<div class="container">
+  <h1><%= @restaurant.name %></h1>
+  <div>
+    <p>
+      <strong>Address: </strong>
+      <%= @restaurant.address %>
+    </p>
+
+    <p>
+      <strong>Category: </strong>
+      <%= @restaurant.category %>
+    </p>
+
+    <p>
+      <strong>Phone-Number: </strong>
+      <%= @restaurant.phone_number %>
+    </p>
+  </div>
+
+<h2>Reviews</h2>
+  <p><strong>Average Rating: </strong>
+   <% @average_rating.floor.times do %>
+      <i class="fas fa-star"></i>
+    <% end %>
+    <% if (@average_rating / 0.5).to_i.odd? %>
+      <i class="fas fa-star-half-alt"></i>
+      <% (5 - @average_rating).floor.times do %>
+        <i class="far fa-star"></i>
+      <% end %>
+    <% else %>
+      <% (5 - @average_rating).floor.times do %>
+        <i class="far fa-star"></i>
+      <% end %>
+
+
+
+  <% @restaurant.reviews.each do |review| %>
+  <div class="card">
+    <p>Content: <%= review.content %></p>
+    <p>Rating: <%= review.rating %></p>
+    <% end %>
+  </div>
+
+</div>
+  <%= link_to "Make a review", new_restaurant_review_path(@restaurant), class: "btn btn-primary btn-sm my-3 "%>
+
+  <%= link_to "Go back", restaurants_path, class: "btn btn-primary btn-sm my-3 "%>
+
+
+
+
+    <h2>Reviews</h2>
+    <p><strong>Average Rating: </strong>
+            <% @average_rating.floor.times do %>
+              <i class="fas fa-star"></i>
+            <% end %>
+            <% if (@average_rating / 0.5).to_i.odd? %>
+              <i class="fas fa-star-half-alt"></i>
+              <% (5 - @average_rating).floor.times do %>
+                <i class="far fa-star"></i>
+              <% end %>
+            <% else %>
+              <% (5 - @average_rating).floor.times do %>
+                <i class="far fa-star"></i>
+              <% end %>
+            <% end %>
+          (<%= @no_of_reviews %>)</p>
+    <p><%= link_to 'Add a review', new_restaurant_review_path(@restaurant) %></p>
+    <div class="reviews">
+      <% @restaurant.reviews.each do |review| %>
+        <div class="border p-3 my-3 rounded review-card">
+          <p><strong>Rating: </strong>
+            <% review.rating.times do %>
+              <i class="fas fa-star"></i>
+            <% end %>
+            <% (5 - review.rating).times do %>
+              <i class="far fa-star"></i>
+            <% end %>
+          </p>
+          <p><%= review.content %></p>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
